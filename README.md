@@ -12,9 +12,18 @@ To install the dependancies needed, you'll run
 yarn add -D prisma
 ```
 ```bash
+cp .env.example .env
+```
+```bash
+npx prisma db push
+```
+```bash
 yarn add -D express
 ```
 ```bash
 yarn add @types/express
 ```
-You'll also want to make sure that the contents of your `.env` file, match the contents of your `.env.example` file to ensure it runs properly
+To run the server,
+```bash
+yarn dev
+```

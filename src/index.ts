@@ -27,6 +27,11 @@ app.post("/users", async (req, res) => {
   res.json({ user });
 });
 
+app.get("/users", async (req, res) => {
+  const users = client.user.findMany({});
+  res.json({users});
+})
+
 app.get("/", (req, res) => {
   res.send("<h1>Hello, world!</h1>");
 });
