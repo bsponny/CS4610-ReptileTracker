@@ -1,72 +1,34 @@
 import express from "express";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
 
+const client = new PrismaClient();
 const app = express();
+app.use(express.json());
 
-type Todo = {
-  id: number
-  description: string
-  isCompleted: boolean
+type CreateUserBody = {
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string,
 }
 
-let id = 0;
-const todos: Todo[] = [];
-
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`)
-  next();
+app.post("/users", async (req, res) => {
+  const {firstName, lastName, email, password} = req.body as CreateUserBody;
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = await client.user.create({
+    data: {
+      firstName,
+      lastName,
+      email,
+      passwordHash,
+    }
+  });
+  res.json({ user });
 });
-
-app.use(express.json())
-
-type TodosPostBody = {
-  description: string
-}
-
-app.post('/todos', (req, res) => {
-  console.log("I AM IN THE ENDPOINT")
-  const { description } = req.body as TodosPostBody;
-  const todo: Todo = {
-    id: id++,
-    description,
-    isCompleted: false
-  }
-  todos.push(todo);
-  res.json({ todo });
-});
-
-app.get('/todos', (req, res) => {
-  // go to database first
-  res.json(todos);
-});
-//PUT https://localhost:3000/todos/10
-//PUT .../todos/asdf
-
-type UpdateTodoBody = {
-  isCompleted: boolean,
-}
-
-app.put('/todos/:id', (req, res) => {
-  const {isCompleted} = req.body as UpdateTodoBody;
-
-  if (isCompleted === undefined) {
-    res.status(400).json({message: "Bad" });
-  }
-
-  const todo = todos.find(t => t.id === parseInt(req.params.id))
-  if (!todo) {
-    res.status(404).json({message: "Todo not found" });
-    return;
-  } else {
-    todo.isCompleted = isCompleted;
-
-    res.json({ todo });
-  }
-})
-
-
 
 app.get("/", (req, res) => {
-  res.send(`<h1>Hello, world!</h1>`);
+  res.send("<h1>Hello, world!</h1>");
 });
 
 app.listen(3000, () => {
