@@ -18,20 +18,29 @@ model User{
   passwordHash String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  reptiles Reptile[]
+  schedules Schedule[]
 }
 
 model Reptile{
   id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
   userId Int
   species String
   name String
   sex String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  feedings Feeding[]
+  husbandries HusbandryRecord[]
+  schedules Schedule[]
 }
 
 model Feeding{
   id Int @id @default(autoincrement())
+  reptile Reptile @relation(fields: [reptileId], references: [id])
   reptileId Int
   foodItem String
   createdAt DateTime @default(now())
@@ -40,6 +49,7 @@ model Feeding{
 
 model HusbandryRecord{
   id Int @id @default(autoincrement())
+  reptile Reptile @relation(fields: [reptileId], references: [id])
   reptileId Int
   length Float
   weight Float
@@ -51,7 +61,9 @@ model HusbandryRecord{
 
 model Schedule{
   id Int @id @default(autoincrement())
+  reptile Reptile @relation(fields: [reptileId], references: [id])
   reptileId Int
+  user User @relation(fields: [userId], references: [id])  
   userId Int
   type String
   description String
