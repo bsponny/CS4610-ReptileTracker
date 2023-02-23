@@ -109,6 +109,7 @@ app.post("/sessions",  async (req, res) => {
     httpOnly: true,
     maxAge: 60000 * 10
   })
+  res.json({user});
 });
 
 app.get("/me", async (req: RequestWithSession, res) => {
