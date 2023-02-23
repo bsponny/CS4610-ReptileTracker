@@ -66,7 +66,21 @@ app.post("/users", async (req, res) => {
 app.get("/users", async (req, res) => {
   const users = await client.user.findMany();
   res.json({users});
-})
+});
+
+type DeleteUser = {
+  id: number
+}
+
+app.delete("/users",async (req, res) => {
+  const {id} = req.body as DeleteUser;
+  const user = await client.user.delete({
+    where: {
+      id
+    }
+  });
+  res.json(user);
+});
 
 //Login
 type RequestWithSession = Request & {
@@ -109,7 +123,7 @@ app.post("/sessions",  async (req, res) => {
     httpOnly: true,
     maxAge: 60000 * 10
   })
-  res.json({user});
+  res.json({session});
 });
 
 app.get("/me", async (req: RequestWithSession, res) => {
