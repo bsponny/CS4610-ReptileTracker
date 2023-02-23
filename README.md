@@ -18,6 +18,9 @@ cp .env.example .env
 npx prisma db push
 ```
 ```bash
+yarn db:generate
+```
+```bash
 yarn add -D express
 ```
 ```bash

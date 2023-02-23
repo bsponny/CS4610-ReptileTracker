@@ -1,4 +1,4 @@
-import express, { Request, RequestHandler } from "express";
+import express, {  } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
@@ -46,6 +46,9 @@ app.delete("/users",async (req, res) => {
   });
   res.json({user});
 });
+
+//Login
+
 
 app.listen(3000, () => {
   console.log("I got started!");
