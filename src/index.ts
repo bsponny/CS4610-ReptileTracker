@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, RequestHandler } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
@@ -6,6 +6,7 @@ const client = new PrismaClient();
 const app = express();
 app.use(express.json());
 
+//Users
 type CreateUserBody = {
   firstName: string,
   lastName: string,
@@ -32,8 +33,18 @@ app.get("/users", async (req, res) => {
   res.json({users});
 })
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello, world!</h1>");
+type deletedUser = {
+  id: number,
+}
+
+app.delete("/users",async (req, res) => {
+  const {id} = req.body as deletedUser;
+  const user = await client.user.delete({
+    where: {
+      id,
+    }
+  });
+  res.json({user});
 });
 
 app.listen(3000, () => {

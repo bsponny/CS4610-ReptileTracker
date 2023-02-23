@@ -7,7 +7,8 @@
     "build": "cd src && tsc",
     "dev": "nodemon src/index.ts",
     "prod": "node dist/index.js",
-    "db:migrate": "prisma migrate dev"
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
