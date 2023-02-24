@@ -211,6 +211,10 @@ app.put("/reptiles/:id", async (req: RequestWithSession, res) => {
         id: parseInt(req.params.id)
       }
     })
+    if (!reptile){
+      res.json("Reptile does not exist");
+      return;
+    }
     if (req.user?.id != reptile?.userId){
       res.json(unauthorized);
       return;
@@ -232,7 +236,69 @@ app.put("/reptiles/:id", async (req: RequestWithSession, res) => {
     res.json(unauthorized);
     return;
   }
-})
+});
+
+//Feeding
+type CreateFeeding = {
+  foodItem: string
+}
+app.post("/feeding/:reptileId", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const reptile = await client.reptile.findFirst({
+      where: {
+        id: parseInt(req.params.reptileId)
+      }
+    });
+    if (!reptile){
+      res.json("Reptile does not exist");
+      return;
+    }
+    if (req.user?.id !== reptile?.userId){
+      res.json(unauthorized);
+      return;
+    }
+    const {foodItem} = req.body as CreateFeeding;
+    const feeding = await client.feeding.create({
+      data: {
+        foodItem,
+        reptileId: reptile.id
+      }
+    });
+    res.json({feeding});
+  }
+  else {
+    res.json(unauthorized);
+    return;
+  }
+});
+
+app.get("/feeding/:reptileId", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const reptile = await client.reptile.findFirst({
+      where: {
+        id: parseInt(req.params.reptileId)
+      }
+    });
+    if (!reptile){
+      res.json("Reptile doesn't exist");
+      return;
+    }
+    if(reptile.userId !== req.user?.id){
+      res.json(unauthorized);
+      return;
+    }
+    const feedings = await client.feeding.findMany({
+      where: {
+        reptileId: reptile.id
+      }
+    });
+    res.json({feedings});
+  }
+  else {
+    res.json(unauthorized);
+    return;
+  }
+});
 
 app.listen(3000, () => {
   console.log("I got started!");
