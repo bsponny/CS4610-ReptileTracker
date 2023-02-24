@@ -137,7 +137,8 @@ type CreateReptileBody = {
   sex: string
 }
 
-app.post("/reptiles", async (req: RequestWithSession, res) => {
+// create Reptile
+app.post("/reptile", async (req: RequestWithSession, res) => {
   if (req.session){
     const {species, name, sex} = req.body as CreateReptileBody;
     const user = req.user;
@@ -161,6 +162,7 @@ app.post("/reptiles", async (req: RequestWithSession, res) => {
   }
 });
 
+// get reptiles
 app.get("/reptiles", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptiles = await client.reptile.findMany({
@@ -176,7 +178,8 @@ app.get("/reptiles", async (req: RequestWithSession, res) => {
   }
 });
 
-app.delete("/reptiles/:id", async (req: RequestWithSession, res) => {
+// delete reptile
+app.delete("/reptile/:id", async (req: RequestWithSession, res) => {
   if (req.session){
       if (req.user){
       const reptile = await client.reptile.findFirst({
@@ -204,7 +207,8 @@ app.delete("/reptiles/:id", async (req: RequestWithSession, res) => {
   }
 });
 
-app.put("/reptiles/:id", async (req: RequestWithSession, res) => {
+//update reptile
+app.put("/reptile/:id", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
       where: {
@@ -242,6 +246,7 @@ app.put("/reptiles/:id", async (req: RequestWithSession, res) => {
 type CreateFeeding = {
   foodItem: string
 }
+// create feeding
 app.post("/feeding/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
@@ -272,6 +277,7 @@ app.post("/feeding/:reptileId", async (req: RequestWithSession, res) => {
   }
 });
 
+// get feedings
 app.get("/feeding/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
@@ -308,6 +314,7 @@ type CreateHusbandryRecord = {
   humidity: number
 }
 
+// create husbandry
 app.post("/husbandry/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
@@ -341,6 +348,7 @@ app.post("/husbandry/:reptileId", async (req: RequestWithSession, res) => {
   }
 });
 
+// get husbandrys
 app.get("/husbandry/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
@@ -382,6 +390,7 @@ type CreateSchedule = {
   sunday: boolean,
 }
 
+// create schedule
 app.post("/schedule/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
@@ -421,6 +430,7 @@ app.post("/schedule/:reptileId", async (req: RequestWithSession, res) => {
   }
 });
 
+// get schedules by reptile
 app.get("/reptileSchedule/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
@@ -449,6 +459,7 @@ app.get("/reptileSchedule/:reptileId", async (req: RequestWithSession, res) => {
   }
 });
 
+// get schedules by user
 app.get("/userSchedule/:userId", async (req: RequestWithSession, res) => {
   if (req.session){
     const user = await client.user.findFirst({
