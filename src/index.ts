@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 
 const client = new PrismaClient();
 const app = express();
+const unauthorized = "Unauthorized User";
 app.use(express.json());
 app.use(cookieParser());
 
@@ -17,7 +18,7 @@ type CreateUserBody = {
   password: string,
 }
 
-const authenticationMiddleware: RequestHandler =async (req:RequestWithSession, res, next) => {
+const authenticationMiddleware: RequestHandler = async (req:RequestWithSession, res, next) => {
   const sessionToken = req.cookies["session-token"];
   if (sessionToken){
     const session = await client.session.findFirst({
@@ -68,15 +69,10 @@ app.get("/users", async (req, res) => {
   res.json({users});
 });
 
-type DeleteUser = {
-  id: number
-}
-
-app.delete("/users",async (req, res) => {
-  const {id} = req.body as DeleteUser;
+app.delete("/users/:id", async (req, res) => {
   const user = await client.user.delete({
     where: {
-      id
+      id: parseInt(req.params.id)
     }
   });
   res.json(user);
@@ -93,7 +89,7 @@ type LoginBody = {
   password: string
 }
 
-app.post("/sessions",  async (req, res) => {
+app.post("/sessions", async (req, res) => {
   const {email, password} = req.body as LoginBody;
   const user = await client.user.findFirst({
     where: {
@@ -130,7 +126,111 @@ app.get("/me", async (req: RequestWithSession, res) => {
   if (req.session) {
     res.json({ user: req.user });
   } else {
-    res.status(401).json({ message: "unauthorized"});
+    res.status(401).json({ message: unauthorized});
+  }
+})
+
+//Reptiles
+type CreateReptileBody = {
+  species: string,
+  name: string,
+  sex: string
+}
+
+app.post("/reptiles", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const {species, name, sex} = req.body as CreateReptileBody;
+    const user = req.user;
+    if (!user){
+      res.json(unauthorized);
+      return;
+    }
+    const reptile = await client.reptile.create({
+      data: {
+        species,
+        name,
+        sex,
+        userId: user.id
+      }
+    });
+    res.json({reptile});
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
+app.get("/reptiles", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const reptiles = await client.reptile.findMany({
+      where: {
+        userId: req.user?.id
+      }
+    });
+    res.json({reptiles});
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
+app.delete("/reptiles/:id", async (req: RequestWithSession, res) => {
+  if (req.session){
+      if (req.user){
+      const reptile = await client.reptile.findFirst({
+        where: {
+          id: parseInt(req.params.id)
+        }
+      })
+      if (req.user.id === reptile?.userId){
+        const deletedReptile = await client.reptile.delete({
+          where:{
+            id: reptile.id
+          }
+        })
+      }
+      else {
+        res.json(unauthorized);
+        return;
+      }
+      res.json({reptile});
+    }
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
+app.put("/reptiles/:id", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const reptile = await client.reptile.findFirst({
+      where: {
+        id: parseInt(req.params.id)
+      }
+    })
+    if (req.user?.id != reptile?.userId){
+      res.json(unauthorized);
+      return;
+    }
+    const {species, name, sex} = req.body as CreateReptileBody;
+    const updatedReptile = await client.reptile.update({
+      where: {
+        id: reptile?.id
+      },
+      data: {
+        species,
+        name,
+        sex
+      }
+    });
+    res.json({updatedReptile});
+  }
+  else{
+    res.json(unauthorized);
+    return;
   }
 })
 
