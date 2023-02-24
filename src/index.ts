@@ -479,5 +479,5 @@ app.get("/userSchedule/:userId", async (req: RequestWithSession, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("I got started!");
+  console.log("Server listening on port 3000!");
 });
