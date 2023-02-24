@@ -163,14 +163,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/reptiles",
+					"raw": "http://localhost:3000/reptile",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"reptiles"
+						"reptile"
 					]
 				}
 			},
@@ -222,14 +222,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/reptiles/4",
+					"raw": "http://localhost:3000/reptile/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"reptiles",
+						"reptile",
 						"4"
 					]
 				}
@@ -251,14 +251,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/reptiles/3",
+					"raw": "http://localhost:3000/reptile/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"reptiles",
+						"reptile",
 						"3"
 					]
 				}
