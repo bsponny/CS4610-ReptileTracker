@@ -308,7 +308,7 @@ type CreateHusbandryRecord = {
   humidity: number
 }
 
-app.post("/husbandry/:reptileId", async (req:RequestWithSession, res) => {
+app.post("/husbandry/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
       where:{
@@ -341,7 +341,7 @@ app.post("/husbandry/:reptileId", async (req:RequestWithSession, res) => {
   }
 });
 
-app.get("/husbandry/:reptileId", async (req:RequestWithSession, res) => {
+app.get("/husbandry/:reptileId", async (req: RequestWithSession, res) => {
   if (req.session){
     const reptile = await client.reptile.findFirst({
       where:{
@@ -362,6 +362,115 @@ app.get("/husbandry/:reptileId", async (req:RequestWithSession, res) => {
       }
     })
     res.json({husbandry});
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
+//Schedule
+type CreateSchedule = {
+  type: string,
+  description: string,
+  monday: boolean,
+  tuesday: boolean,
+  wednesday: boolean,
+  thursday: boolean,
+  friday: boolean,
+  saturday: boolean,
+  sunday: boolean,
+}
+
+app.post("/schedule/:reptileId", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const reptile = await client.reptile.findFirst({
+      where:{
+        id: parseInt(req.params.reptileId)
+      }
+    });
+    if (!reptile){
+      res.json("Reptile doesn't exist");
+      return;
+    }
+    if (reptile.userId !== req.user?.id){
+      res.json(unauthorized);
+      return;
+    }
+    const {type, description, monday, tuesday, wednesday, thursday, friday, saturday, sunday} = req.body as CreateSchedule;
+    const schedule = await client.schedule.create({
+      data: {
+	type,
+	description,
+	monday,
+	tuesday,
+	wednesday,
+	thursday,
+	friday,
+	saturday,
+	sunday,
+        reptileId: reptile.id,
+	userId: req.user?.id
+      }
+    });
+    res.json({schedule});
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
+app.get("/reptileSchedule/:reptileId", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const reptile = await client.reptile.findFirst({
+      where:{
+        id: parseInt(req.params.reptileId)
+      }
+    });
+    if (!reptile){
+      res.json("Reptile doesn't exist");
+      return;
+    }
+    if (reptile.userId !== req.user?.id){
+      res.json(unauthorized);
+      return;
+    }
+    const schedule = await client.schedule.findMany({
+      where: {
+        reptileId: reptile.id
+      }
+    });
+    res.json({schedule});
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
+app.get("/userSchedule/:userId", async (req: RequestWithSession, res) => {
+  if (req.session){
+    const user = await client.user.findFirst({
+      where:{
+        id: parseInt(req.params.userId)
+      }
+    });
+    if (!user){
+      res.json(unauthorized);
+      return;
+    }
+    if (user.id !== req.user?.id){
+      res.json(unauthorized);
+      return;
+    }
+
+    const schedule = await client.schedule.findMany({
+      where: {
+        userId: user.id
+      }
+    });
+    res.json({schedule});
   }
   else{
     res.json(unauthorized);
