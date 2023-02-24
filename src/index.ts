@@ -300,6 +300,75 @@ app.get("/feeding/:reptileId", async (req: RequestWithSession, res) => {
   }
 });
 
+//Husbandry Record
+type CreateHusbandryRecord = {
+  length: number,
+  weight: number,
+  temperature: number,
+  humidity: number
+}
+
+app.post("/husbandry/:reptileId", async (req:RequestWithSession, res) => {
+  if (req.session){
+    const reptile = await client.reptile.findFirst({
+      where:{
+        id: parseInt(req.params.reptileId)
+      }
+    });
+    if (!reptile){
+      res.json("Reptile doesn't exist");
+      return;
+    }
+    if (reptile.userId !== req.user?.id){
+      res.json(unauthorized);
+      return;
+    }
+    const {length, weight, temperature, humidity} = req.body as CreateHusbandryRecord;
+    const husbandry = await client.husbandryRecord.create({
+      data: {
+        length,
+        weight,
+        temperature,
+        humidity,
+        reptileId: reptile.id
+      }
+    });
+    res.json({husbandry});
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
+app.get("/husbandry/:reptileId", async (req:RequestWithSession, res) => {
+  if (req.session){
+    const reptile = await client.reptile.findFirst({
+      where:{
+        id: parseInt(req.params.reptileId)
+      }
+    });
+    if (!reptile){
+      res.json("Reptile doesn't exist");
+      return;
+    }
+    if (reptile.userId !== req.user?.id){
+      res.json(unauthorized);
+      return;
+    }
+    const husbandry = await client.husbandryRecord.findMany({
+      where: {
+        reptileId: reptile.id
+      }
+    })
+    res.json({husbandry});
+  }
+  else{
+    res.json(unauthorized);
+    return;
+  }
+});
+
 app.listen(3000, () => {
   console.log("I got started!");
 });
