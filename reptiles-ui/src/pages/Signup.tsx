@@ -1,4 +1,18 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
+
+class SignUpUser {
+    FirstName: string;
+    LastName: string;
+    email: string;
+    password: string;
+
+    constructor(firstName: string, lastName: string, email: string, password:string) {
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+}
 
 export const SignupPage = () => {
     const [firstNameInput, setFirstNameInput] = React.useState<string>("");
@@ -6,12 +20,26 @@ export const SignupPage = () => {
     const [emailInput, setEmailInput] = React.useState<string>("");
     const [passwordInput, setPasswordInput] = React.useState<string>("");
 
+    const clickSubmit = (event: FormEvent) => {
+        event.preventDefault();
+        let myBody = new SignUpUser(firstNameInput, lastNameInput, emailInput, passwordInput);
+        fetch('http://localhost:3000/users', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                body: JSON.stringify(myBody) 
+            }
+        )
+        .then(results => results.json())
+        .then(results => {
+            console.log(results);
+        });
+    };
 
     return (
         <main className="signup">
             <div className="inner">
                 <h1>Sign up</h1>
-                <form>
+                <form onSubmit={(e) => clickSubmit(e)}>
                     <div className="form-group">
                         <label htmlFor="firstName">First Name*: </label>
                         <input type="text" placeholder="First Name" id="firstName" onChange={e => setFirstNameInput(e.target.value)} required />
