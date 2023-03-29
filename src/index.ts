@@ -3,10 +3,17 @@ import { PrismaClient, User, Session } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from 'uuid';
 import cookieParser from "cookie-parser";
+import cors from 'cors';
 
 const client = new PrismaClient();
 const app = express();
 const unauthorized = "Unauthorized User";
+const options = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  AccessControlAllowOrigin: '*'
+};
+app.use(cors(options));
 app.use(express.json());
 app.use(cookieParser());
 
