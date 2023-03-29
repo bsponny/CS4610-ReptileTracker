@@ -1,0 +1,15 @@
+.signup {
+    height: calc(100vh - 100px);
+    display: flex;
+}
+.signup > .inner {
+    padding: 30px;
+}
+
+.form-group {
+    margin: 15px;
+}
+
+.form-group > input {
+    height: 25px;
+}

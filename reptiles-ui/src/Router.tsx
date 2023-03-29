@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { HomePage } from './pages/Home';
 import { DashboardPage } from './pages/Dashboard';
+import { SignupPage } from './pages/Signup';
 
 export const Router = () => {
   const [page, setPage] = useState(window.location.hash.replace('#', ''));
@@ -25,15 +26,22 @@ export const Router = () => {
 
   // dynamically select which page to render based on application state
   let component = <div>Not found</div>
-  if (page === "home" || page === "") component = <HomePage />
+  if (page === "home" || page === "") component = <HomePage setPage={setPage} />
   else if (page === "dashboard") component = <DashboardPage />
+  else if (page === "sign-up") component = <SignupPage />
 
   return (
     <div>
-      <nav>
-        <button onClick={() => setPage("home")}>Home</button>
-        <button onClick={() => setPage("dashboard")}>Dashboard</button>
-      </nav>
+      <header>
+        <nav>
+          <ul>
+            <li><a onClick={() => setPage("home")}>Home</a></li>
+            <li><a onClick={() => setPage("sign-up")}>Sign Up</a></li>
+            <li><a onClick={() => setPage("login")}>Login</a></li>
+            {/* <li><a href="#">Contact</a></li> */}
+          </ul>
+        </nav>
+      </header>
       {component}
     </div>
   );
