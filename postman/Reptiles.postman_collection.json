@@ -1,0 +1,648 @@
+{
+	"info": {
+		"_postman_id": "3c3035c9-0e0f-4220-bf27-dffa6908e2c4",
+		"name": "Reptiles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26000004"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Harry\",\r\n    \"lastName\": \"Potter\",\r\n    \"email\": \"hpmoney@gmail.com\",\r\n    \"password\": \"Ch0zen1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Ron\",\r\n    \"lastName\": \"Weasley\",\r\n    \"email\": \"redhead@gmail.com\",\r\n    \"password\": \"f***Scabbers!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Hermione\",\r\n    \"lastName\": \"Granger\",\r\n    \"email\": \"hgranger@gmail.com\",\r\n    \"password\": \"brightestWitch101\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Draco\",\r\n    \"lastName\": \"Malfoy\",\r\n    \"email\": \"pureBlood1@gmail.com\",\r\n    \"password\": \"myFatherWillHearAboutThis!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reptile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"species\": \"Corn Snake\",\r\n    \"name\": \"Gross\",\r\n    \"sex\": \"Male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/reptile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reptile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reptile Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"species\": \"Cobra\",\r\n    \"name\": \"Nasty\",\r\n    \"sex\": \"Female\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/reptile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reptile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reptile Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"species\": \"Boa Constrictor\",\r\n    \"name\": \"Disgusting\",\r\n    \"sex\": \"Male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/reptile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reptile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reptile Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"species\": \"Rattlesnake\",\r\n    \"name\": \"Ewwww\",\r\n    \"sex\": \"Female\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/reptile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reptile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reptile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/reptiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reptiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feeding",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foodItem\": \"mouse\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/feeding/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feeding",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feeding Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foodItem\": \"mouse\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/feeding/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feeding",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feeding Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foodItem\": \"mouse\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/feeding/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feeding",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feeding Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foodItem\": \"mouse\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/feeding/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feeding",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Husbandry",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"length\": 10.3,\r\n    \"weight\": 2.1,\r\n    \"temperature\": 75,\r\n    \"humidity\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/husbandry/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"husbandry",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Husbandry Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"length\": 10.3,\r\n    \"weight\": 2.1,\r\n    \"temperature\": 75,\r\n    \"humidity\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/husbandry/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"husbandry",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Husbandry Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"length\": 10.3,\r\n    \"weight\": 2.1,\r\n    \"temperature\": 75,\r\n    \"humidity\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/husbandry/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"husbandry",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Husbandry Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"length\": 10.3,\r\n    \"weight\": 2.1,\r\n    \"temperature\": 75,\r\n    \"humidity\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/husbandry/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"husbandry",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"type\": \"snake\",\r\n\t\"description\": \"disgusting snake\",\r\n\t\"monday\": false,\r\n\t\"tuesday\": false,\r\n\t\"wednesday\": false, \r\n\t\"thursday\": true,\r\n\t\"friday\": false,\r\n\t\"saturday\": false,\r\n\t\"sunday\": false\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/schedule/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"schedule",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"type\": \"snake\",\r\n\t\"description\": \"disgusting snake\",\r\n\t\"monday\": false,\r\n\t\"tuesday\": false,\r\n\t\"wednesday\": false, \r\n\t\"thursday\": true,\r\n\t\"friday\": false,\r\n\t\"saturday\": false,\r\n\t\"sunday\": false\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/schedule/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"schedule",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"type\": \"snake\",\r\n\t\"description\": \"disgusting snake\",\r\n\t\"monday\": false,\r\n\t\"tuesday\": false,\r\n\t\"wednesday\": false, \r\n\t\"thursday\": true,\r\n\t\"friday\": false,\r\n\t\"saturday\": false,\r\n\t\"sunday\": false\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/schedule/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"schedule",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"type\": \"snake\",\r\n\t\"description\": \"disgusting snake\",\r\n\t\"monday\": false,\r\n\t\"tuesday\": false,\r\n\t\"wednesday\": false, \r\n\t\"thursday\": true,\r\n\t\"friday\": false,\r\n\t\"saturday\": false,\r\n\t\"sunday\": false\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/schedule/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"schedule",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
