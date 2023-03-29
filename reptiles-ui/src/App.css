@@ -13,3 +13,10 @@
 .form-group > input {
     height: 25px;
 }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+.navbar .right-side {
+    margin-right: 30px;
+}

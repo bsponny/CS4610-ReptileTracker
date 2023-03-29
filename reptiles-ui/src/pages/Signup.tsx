@@ -1,4 +1,6 @@
+import e from 'express';
 import React, { FormEvent } from 'react';
+import { DashboardPage } from './Dashboard';
 
 class SignUpUser {
     firstName: string;
@@ -14,11 +16,21 @@ class SignUpUser {
     }
 }
 
-export const SignupPage = () => {
+interface SignupProps {
+    setToken: (tokenString: any) => void;
+    setPage: (pageName: any) => void;
+    token: any;
+}
+
+export const SignupPage = ({setToken, setPage, token}: SignupProps) => {
     const [firstNameInput, setFirstNameInput] = React.useState<string>("");
     const [lastNameInput, setLastNameInput] = React.useState<string>("");
     const [emailInput, setEmailInput] = React.useState<string>("");
     const [passwordInput, setPasswordInput] = React.useState<string>("");
+
+    if(token) {
+        setPage("");
+    }
 
     const clickSubmit = (event: FormEvent) => {
         event.preventDefault();
@@ -29,9 +41,16 @@ export const SignupPage = () => {
                 body: JSON.stringify(myBody) 
             }
         )
-        .then(results => results.json())
         .then(results => {
-            console.log(results);
+            if(results.status >= 400) {
+                throw new Error("Server responds with error!");
+            }
+            return results.json();
+        })
+        .then(results => {
+            setPage(DashboardPage);
+            setToken(results.user.sessions[0].token);
+            window.location.reload();
         });
     };
 
