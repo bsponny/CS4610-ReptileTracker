@@ -9,6 +9,11 @@ body {
     color: #fff;
     padding: 30px 10px;
   }
+  .container ul, body {
+    background-color: #004225;
+    color: #fff;
+    overflow-x: hidden;
+  }
   
   nav ul {
     list-style: none;
@@ -33,7 +38,10 @@ body {
   #intro {
     position: relative;
     height: calc(100vh - 40px);
+    min-width: 100vw;
     color: white;
+    background-color: #333333;
+    z-index: 10;
   }
   .overlay-text {
     z-index: 10;
