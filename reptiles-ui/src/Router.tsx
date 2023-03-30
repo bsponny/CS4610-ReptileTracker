@@ -3,6 +3,7 @@ import { HomePage } from './pages/Home';
 import { DashboardPage } from './pages/Dashboard';
 import { SignupPage } from './pages/Signup';
 import useToken from './components/Auth';
+import { LoginPage } from './pages/login';
 
 export const Router = () => {
   const [page, setPage] = useState(window.location.hash.replace('#', ''));
@@ -33,6 +34,7 @@ export const Router = () => {
   if (page === "home" || (page === "" && !token)) component = <HomePage setPage={setPage} />
   else if (page === "dashboard" || (page === "" && token)) component = <DashboardPage setPage={setPage} token={token}/>
   else if (page === "sign-up") component = <SignupPage setToken={setToken} setPage={setPage} token={token}/>
+  else if (page === "login") component = <LoginPage setToken={setToken} setPage={setPage} token={token} />
 
   const logout = () => {
     setToken("");

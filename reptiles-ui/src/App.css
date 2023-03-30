@@ -20,3 +20,8 @@
 .navbar .right-side {
     margin-right: 30px;
 }
+
+li:hover > a, a.btn:hover {
+    cursor: pointer;
+    color: gray;
+}
