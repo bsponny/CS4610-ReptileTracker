@@ -4,6 +4,7 @@ import { DashboardPage } from './pages/Dashboard';
 import { SignupPage } from './pages/Signup';
 import { useAuth } from './hooks/useAuth';
 import { useApi } from './hooks/useApi';
+import { LoginPage } from './pages/login';
 
 export const Router = () => {
   const [page, setPage] = useState(window.location.hash.replace('#', ''));
@@ -32,8 +33,9 @@ export const Router = () => {
   // dynamically select which page to render based on application state
   let component = <div>Not found</div>
   if (page === "home" || (page === "" && !token)) component = <HomePage setPage={setPage} />
-  else if (page === "dashboard" || (page === "" && token)) component = <DashboardPage setPage={setPage} token={token}/>
+  else if (page === "dashboard" || (page === "" && token)) component = <DashboardPage />
   else if (page === "sign-up") component = <SignupPage/>
+  else if (page === "login") component = <LoginPage token={token} setPage={setPage} setToken={setToken}/>
 
   const logout = () => {
     setToken("");

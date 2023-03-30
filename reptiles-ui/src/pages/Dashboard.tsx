@@ -1,16 +1,21 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 interface DashboardProps {
     setPage: (pageName: string) => void;
     token: any;
 }
 
-export const DashboardPage = ({setPage, token}:DashboardProps) => {
+export const DashboardPage = () => {
     const [name, setName] = React.useState<string>("");
+    const navigate = useNavigate();
 
-    if(!token) {
-        setPage("home");
-    }
+    React.useEffect(() => {
+        if (!window.localStorage.getItem("session-token")){
+            navigate("/", {replace: true});
+        }
+    })
+
     
     fetch('http://localhost:3000/me/', { credentials: "same-origin"})
     .then(res => res.json())
