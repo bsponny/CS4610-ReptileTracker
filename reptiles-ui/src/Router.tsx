@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { HomePage } from './pages/Home';
 import { DashboardPage } from './pages/Dashboard';
 import { SignupPage } from './pages/Signup';
-import useToken from './components/Auth';
+import { useAuth } from './hooks/useAuth';
+import { useApi } from './hooks/useApi';
 
 export const Router = () => {
   const [page, setPage] = useState(window.location.hash.replace('#', ''));
-  const { token, setToken} = useToken();
+  const { token, setToken} = useAuth();
 
 
   // this synchronizes the application state with the browser location state
@@ -25,14 +26,14 @@ export const Router = () => {
       window.removeEventListener("hashchange", hashChange);
     }
     
-    setToken(useToken());
+    // setToken(useApi());
   }, [])
 
   // dynamically select which page to render based on application state
   let component = <div>Not found</div>
   if (page === "home" || (page === "" && !token)) component = <HomePage setPage={setPage} />
   else if (page === "dashboard" || (page === "" && token)) component = <DashboardPage setPage={setPage} token={token}/>
-  else if (page === "sign-up") component = <SignupPage setToken={setToken} setPage={setPage} token={token}/>
+  else if (page === "sign-up") component = <SignupPage/>
 
   const logout = () => {
     setToken("");
