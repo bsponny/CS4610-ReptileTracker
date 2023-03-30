@@ -133,7 +133,7 @@ app.get("/me", async (req: RequestWithSession, res) => {
   if (req.session) {
     res.json({ user: req.user });
   } else {
-    res.status(401).json({ message: unauthorized});
+    res.status(401).json({ message: unauthorized });
   }
 })
 
