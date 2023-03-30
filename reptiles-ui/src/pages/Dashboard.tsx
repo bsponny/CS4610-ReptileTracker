@@ -21,6 +21,14 @@ export const DashboardPage = ({setPage, token}:DashboardProps) => {
     return(
         <main className="dashboard">
             <p>Hi Dashboard!</p>
+            <div className="modules-container">
+                <div className="card reptiles">
+                    <h2>Reptiles</h2>
+                </div>
+                <div className="card schedule">
+                    <h2>Today's Schedule</h2>
+                </div>
+            </div>
         </main>
     );
 };
