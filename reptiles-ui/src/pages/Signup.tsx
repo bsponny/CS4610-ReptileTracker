@@ -18,10 +18,10 @@ export const SignupPage = () => {
             password
         }
 
-        const resultBody = await api.post("http://localhost:3000/users", body);
+        const resultBody = await api.post("/users", body);
         console.log(resultBody);
-        if (resultBody.token){
-            setToken(resultBody.token);
+        if (resultBody){
+            setToken(resultBody.user.sessions[0].token);
         }
     }
 

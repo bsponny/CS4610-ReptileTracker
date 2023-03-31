@@ -15,8 +15,10 @@ export class Api{
             },
         }
         
+        let local = "http://localhost:3000";
+        local += url;
         options.body = JSON.stringify(body);
-        const result = await fetch(url, options);
+        const result = await fetch(local, options);
         return result.json();
     }
 
