@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import { AuthContext } from '../contexts/auth';
 import { useApi } from '../hooks/useApi';
+import { useAuth } from '../hooks/useAuth';
 
 export const SignupPage = () => {
     const [firstName, setFirstName] = useState("");
@@ -8,7 +8,7 @@ export const SignupPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const api = useApi();
-    const setToken = useContext(AuthContext);
+    const {token, setToken} = useAuth();
 
     async function signUp() {
         const body = {
@@ -23,6 +23,8 @@ export const SignupPage = () => {
         if (resultBody){
             setToken(resultBody.user.sessions[0].token);
         }
+
+        const result = await api.get("/me");
     }
 
     return (

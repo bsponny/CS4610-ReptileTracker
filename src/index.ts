@@ -26,7 +26,7 @@ type CreateUserBody = {
 }
 
 const authenticationMiddleware: RequestHandler = async (req:RequestWithSession, res, next) => {
-  const sessionToken = req.cookies["session-token"];
+  const sessionToken = req.get("Authorization")?.replace("Bearer ","");
   if (sessionToken){
     const session = await client.session.findFirst({
       where: {

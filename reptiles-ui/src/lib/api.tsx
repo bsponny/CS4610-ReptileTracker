@@ -12,12 +12,16 @@ export class Api{
             method,
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("session-token")}`
             },
         }
         
         let local = "http://localhost:3000";
         local += url;
-        options.body = JSON.stringify(body);
+
+        if (method === "post" || method === "put"){
+            options.body = JSON.stringify(body);
+        }
         const result = await fetch(local, options);
         return result.json();
     }
