@@ -35,7 +35,7 @@ export const Router = () => {
   if (page === "home" || (page === "" && !token)) component = <HomePage setPage={setPage} />
   else if (page === "dashboard" || (page === "" && token)) component = <DashboardPage />
   else if (page === "sign-up") component = <SignupPage/>
-  else if (page === "login") component = <LoginPage token={token} setPage={setPage} setToken={setToken}/>
+  else if (page === "login") component = <LoginPage />
 
   const logout = () => {
     setToken("");
