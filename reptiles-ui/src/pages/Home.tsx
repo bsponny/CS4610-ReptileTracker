@@ -3,11 +3,9 @@ import whiteLizrd from '../assets/white-lizrd.png';
 import snakeVideo from '../assets/snake.mp4';
 import './Home.css';
 
-interface HomeProps {
-    setPage: (pageName: string) => void;
-}
 
-export const HomePage = ({setPage}: HomeProps) => {
+
+export const HomePage = () => {
     return (
         <main>
             <section id="intro">
@@ -18,8 +16,8 @@ export const HomePage = ({setPage}: HomeProps) => {
                     <div className="inner-textbox">
                         <img src={whiteLizrd} />
                         <p className="life">Our app makes your life easier!</p>
-                        <a className="btn" onClick={() => setPage("login")}>Login</a>
-                        <a className="btn btn-white" onClick={() => setPage("sign-up")}>Sign Up</a>
+                        <a className="btn" href="/login">Login</a>
+                        <a className="btn btn-white" href="/sign-up">Sign Up</a>
                     </div>
                 </div>
             </section>

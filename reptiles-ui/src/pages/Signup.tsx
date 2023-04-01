@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { useApi } from '../hooks/useApi';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const SignupPage = () => {
     const [firstName, setFirstName] = useState("");
@@ -8,7 +9,8 @@ export const SignupPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const api = useApi();
-    const {token, setToken} = useAuth();
+    const navigate = useNavigate();
+    const { token, setToken } = useAuth();
 
     async function signUp() {
         const body = {
@@ -19,11 +21,13 @@ export const SignupPage = () => {
         }
 
         const resultBody = await api.post("/users", body);
-        console.log(resultBody);
-        if (resultBody){
-            setToken(resultBody.user.sessions[0].token);
+        if (resultBody) {
+            const newToken = resultBody.user.sessions[0].token;
+            console.log(newToken);
+            window.localStorage.setItem("session-token", newToken);
+            setToken(newToken);
+            navigate("/dashboard", { replace: true });
         }
-
         const result = await api.get("/me");
     }
 

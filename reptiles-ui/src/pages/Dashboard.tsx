@@ -7,11 +7,11 @@ import { useApi } from '../hooks/useApi';
 export const DashboardPage = () => {
     const api = useApi();
     const [name, setName] = React.useState<string>("");
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         if (!window.localStorage.getItem("session-token")){
-            // navigate("/", {replace: true});
+            navigate("/", {replace: true});
         }
     const fetchMe = api.get('/me');
     fetchMe.then(res => {

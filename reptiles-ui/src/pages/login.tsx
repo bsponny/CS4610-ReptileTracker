@@ -12,20 +12,10 @@ class LoginUser {
         this.password = password;
     }
 }
-
-interface LoginProps {
-    setToken: (tokenString: any) => void;
-    setPage: (pageName: any) => void;
-    token: any;
-}
-
-export const LoginPage = ({setToken, setPage, token}: LoginProps) => {
+export const LoginPage = () => {
     const [emailInput, setEmailInput] = React.useState<string>("");
     const [passwordInput, setPasswordInput] = React.useState<string>("");
 
-    if(token) {
-        setPage("");
-    }
 
     const clickSubmit = (event: FormEvent) => {
         event.preventDefault();
@@ -43,8 +33,7 @@ export const LoginPage = ({setToken, setPage, token}: LoginProps) => {
             return results.json();
         })
         .then(results => {
-            setPage(DashboardPage);
-            setToken(results.user.sessions[0].token);
+            // set Page and set Token
             window.location.reload();
         });
     };

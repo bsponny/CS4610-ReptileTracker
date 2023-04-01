@@ -5,6 +5,8 @@ import { SignupPage } from './pages/Signup';
 import { useAuth } from './hooks/useAuth';
 import { useApi } from './hooks/useApi';
 import { LoginPage } from './pages/login';
+import { RouterProvider,  createBrowserRouter } from 'react-router-dom';
+import { serialize } from 'v8';
 
 export const Router = () => {
   const [page, setPage] = useState(window.location.hash.replace('#', ''));
@@ -30,12 +32,28 @@ export const Router = () => {
     // setToken(useApi());
   }, [])
 
-  // dynamically select which page to render based on application state
-  let component = <div>Not found</div>
-  if (page === "home" || (page === "" && !token)) component = <HomePage setPage={setPage} />
-  else if (page === "dashboard" || (page === "" && token)) component = <DashboardPage />
-  else if (page === "sign-up") component = <SignupPage/>
-  else if (page === "login") component = <LoginPage token={token} setPage={setPage} setToken={setToken}/>
+  const routes = createBrowserRouter([
+    {
+      path: "/",
+      element: <HomePage />
+    },
+    {
+      path: "/home",
+      element: <HomePage />
+    },
+    {
+      path: "/sign-up",
+      element: <SignupPage />
+    },
+    {
+      path: "/login",
+      element: <LoginPage />
+    },
+    {
+      path: "/dashboard",
+      element: <DashboardPage />
+    }
+  ]);
 
   const logout = () => {
     setToken("");
@@ -48,14 +66,14 @@ export const Router = () => {
         <nav className="navbar">
         {token ? (
           <ul>
-            <li><a onClick={() => setPage("home")}>Home</a></li>
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
           </ul>
         ) : (
           <ul>
-            <li><a onClick={() => setPage("home")}>Home</a></li>
-            <li><a onClick={() => setPage("sign-up")}>Sign Up</a></li>
-            <li><a onClick={() => setPage("login")}>Login</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/sign-up">Sign Up</a></li>
+            <li><a href="/login">Login</a></li>
           </ul>
         ) }
         { token ? (
@@ -69,7 +87,7 @@ export const Router = () => {
         }
         </nav>
       </header>
-      {component}
+      <RouterProvider router={routes} />
     </div>
   );
 }
