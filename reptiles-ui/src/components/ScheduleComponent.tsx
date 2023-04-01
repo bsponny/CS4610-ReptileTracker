@@ -23,6 +23,7 @@ export const ScheduleComponent = () => {
     const [schedule, setSchedule] = useState<Schedule[]>([]);
     useEffect(() => {
         setTodaysDayName();
+        getSchedule();
      }, []);
 
     const WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -40,8 +41,7 @@ export const ScheduleComponent = () => {
         const result = await api.get(url);
         setSchedule(result.schedule)
     }
-    getSchedule();
-    console.log(schedule);
+    
 
     return (
         <div className="schedule-component">
