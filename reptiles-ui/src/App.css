@@ -43,6 +43,7 @@ main.dashboard {
     color: #004225;
     border-radius: 20px;
     margin: 20px;
+    overflow-y: scroll;
 }
 .card h2 {
     margin: 20px;
@@ -65,4 +66,12 @@ main.dashboard {
 .modal-form .save-button {
     color: white;
     background-color:#004225;
+}
+.reptile-component .reptile {
+    padding: 10px 5px;
+    border-bottom: 1px solid #004225;
+}
+.reptile-component .reptile:hover {
+    cursor: pointer;
+    background-color: #DDD;
 }
