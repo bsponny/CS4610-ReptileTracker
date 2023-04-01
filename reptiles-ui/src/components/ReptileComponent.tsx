@@ -1,21 +1,25 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { useApi } from '../hooks/useApi';
+import { Router } from '../Router';
 import Modal from 'react-modal';
+
+interface Reptile {
+    id: number;
+    name: string;
+    species: string;
+    sex: string;
+}
 
 export const ReptileComponent = () => {
     const api = useApi();
-    const [reptiles, setReptiles] = useState<string[]>([]);
+    const [reptiles, setReptiles] = useState<Reptile[]>([]);
     const [addReptileModalOpen, setReptileModal] = useState<boolean>(false);
     const [reptileName, setReptileName] = useState<string>("");
     const [reptileSpecies, setReptileSpecies] = useState<string>("");
     const [reptileSex, setReptileSex] = useState<string>("");
 
     useEffect(() => {
-    const getReptiles = api.get('/reptiles');
-    getReptiles.then(res => {
-        console.log(res);
-        setReptiles([]);
-    });
+        getReptiles();
     }, []);
 
     const addNewReptile = (event: FormEvent) => {
@@ -25,12 +29,29 @@ export const ReptileComponent = () => {
             species: reptileSpecies,
             sex: reptileSex
         };
-        console.log(body);
+
+        const postReptileReply = api.post('/reptile', body);
+        postReptileReply.then(res => {
+            getReptiles();
+            setReptileModal(false);
+        });
     };
 
+    const getReptiles = () => {
+        const get = api.get('/reptiles');
+        get.then(res => {
+            console.log(res.reptiles);
+            setReptiles(res.reptiles);
+        });
+    }
     return (
         <div className="reptile-component">
-            <p>Reptiles listed here: </p>
+            <button onClick={(e) => setReptileModal(true)}>Add Reptile</button>
+            {reptiles.map(reptile => (
+                <div className="reptile" key={reptile.id}>
+                    {reptile.id} | {reptile.name} | {reptile.species} | {reptile.sex}
+                </div>
+            ))}
             <Modal isOpen={addReptileModalOpen}
                    ariaHideApp={false}
                    contentLabel="Selected Option">
@@ -49,17 +70,13 @@ export const ReptileComponent = () => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="reptileSex">Sex: </label>
-                        <select id="reptileSex" name="reptileSex" onChange={e => setReptileSex(e.target.value)}>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
+                        <input id="reptileSex" name="reptileSex" onChange={e => setReptileSex(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Add Reptile" className="save-button"/>
                     </div>
                 </form>
             </Modal>
-            <button onClick={(e) => setReptileModal(true)} >Add Reptile</button>
         </div>
     )
 }
