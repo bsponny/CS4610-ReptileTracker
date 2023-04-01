@@ -7,6 +7,7 @@ import { useApi } from './hooks/useApi';
 import { LoginPage } from './pages/login';
 import { RouterProvider,  createBrowserRouter } from 'react-router-dom';
 import { serialize } from 'v8';
+import ReptilePage from './pages/ReptilePage';
 
 export const Router = () => {
   const [page, setPage] = useState(window.location.hash.replace('#', ''));
@@ -52,6 +53,10 @@ export const Router = () => {
     {
       path: "/dashboard",
       element: <DashboardPage />
+    },
+    {
+      path: "/reptile/:id",
+      element: <ReptilePage />
     }
   ]);
 

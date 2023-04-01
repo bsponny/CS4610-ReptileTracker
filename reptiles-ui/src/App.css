@@ -75,3 +75,7 @@ main.dashboard {
     cursor: pointer;
     background-color: #DDD;
 }
+.reptile-page {
+    min-height: 100vh;
+    min-width: 100vw;
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { useApi } from '../hooks/useApi';
-import { Router } from '../Router';
+import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 
 interface Reptile {
@@ -17,6 +17,7 @@ export const ReptileComponent = () => {
     const [reptileName, setReptileName] = useState<string>("");
     const [reptileSpecies, setReptileSpecies] = useState<string>("");
     const [reptileSex, setReptileSex] = useState<string>("");
+    const nav = useNavigate();
 
     useEffect(() => {
         getReptiles();
@@ -44,11 +45,16 @@ export const ReptileComponent = () => {
             setReptiles(res.reptiles);
         });
     }
+    
+    const openReptile = (reptileId:number) => {
+        nav("/reptile/" + reptileId, {replace: true})
+    };
+
     return (
         <div className="reptile-component">
             <button onClick={(e) => setReptileModal(true)}>Add Reptile</button>
             {reptiles.map(reptile => (
-                <div className="reptile" key={reptile.id}>
+                <div className="reptile" key={reptile.id} onClick={()=>openReptile(reptile.id)}>
                     {reptile.id} | {reptile.name} | {reptile.species} | {reptile.sex}
                 </div>
             ))}

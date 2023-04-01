@@ -20,6 +20,7 @@ export const LoginPage = () => {
         console.log(user);
         console.log(user.session.token);
         if (user){
+            window.localStorage.setItem("session-token", user.session.token);
             setToken(user.session.token);
             window.location.reload();
         }
