@@ -1,37 +1,38 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-
-interface DashboardProps {
-    setPage: (pageName: string) => void;
-    token: any;
-}
+import { ReptileComponent } from "../components/ReptileComponent"
+import { ScheduleComponent } from '../components/ScheduleComponent';
+import { useApi } from '../hooks/useApi';
 
 export const DashboardPage = () => {
+    const api = useApi();
     const [name, setName] = React.useState<string>("");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     React.useEffect(() => {
         if (!window.localStorage.getItem("session-token")){
-            navigate("/", {replace: true});
+            // navigate("/", {replace: true});
         }
-    })
+    const fetchMe = api.get('/me');
+    fetchMe.then(res => {
+        setName(res.user.firstName);
+    });
+    }, []);
 
     
-    fetch('http://localhost:3000/me/', { credentials: "same-origin"})
-    .then(res => res.json())
-    .then(res => {
-        console.log(res);
-    });
+    
 
     return(
         <main className="dashboard">
-            <p>Hi Dashboard!</p>
+            <p>Welcome to your Dashboard, {name}!</p>
             <div className="modules-container">
                 <div className="card reptiles">
-                    <h2>Reptiles</h2>
+                    <h2 onClick={() => console.log("to Reptile Page.")} className="reptiles-link">Reptiles ↗</h2>
+                    <ReptileComponent />
                 </div>
                 <div className="card schedule">
                     <h2>Today's Schedule</h2>
+                    <ScheduleComponent />
                 </div>
             </div>
         </main>

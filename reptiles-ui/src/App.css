@@ -48,3 +48,21 @@ main.dashboard {
     margin: 20px;
     border-bottom: 2px solid #004225;
 }
+.modal-header {
+    color: #004225;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-header > button {
+    height: 40px;
+    background-color: darkred;
+}
+ .modal-form label {
+    color: #004225;
+    font-size: 25px;
+}
+.modal-form .save-button {
+    color: white;
+    background-color:#004225;
+}
